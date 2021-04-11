@@ -27,7 +27,7 @@ async def user_confirm(query: types.CallbackQuery, callback_data: dict):
     being = callback_data.get("being")
     user_id = int(callback_data.get("user_id"))
     chat_id = int(query.message.chat.id)
-    user_fullname = query.message.full_name
+    user_fullname = query.message.from_user.full_name
 
     if query.from_user.id != user_id:
         return
@@ -37,13 +37,13 @@ async def user_confirm(query: types.CallbackQuery, callback_data: dict):
             await query.message.chat.kick(user_id=user_id, until_date=datetime.timedelta(minutes=60))
 
             logger.info(
-                f"Пользователь {member_fullname} был забанен!"
+                f"Пользователь {user_fullname} был забанен!"
             )
 
-            await message.answer(f'Пользовтаель {user_fullname} был забанен по собественному желанию!')
+            await query.message.answer(f'Пользовтаель {user_fullname} был забанен по собественному желанию!')
 
         except BadRequest:
-            logger.info(f"Бот не смог забанить пользователя {member_fullname}")
+            logger.info(f"Бот не смог забанить пользователя {user_fullname}")
 
     await asyncio.sleep(5)
 
