@@ -27,7 +27,7 @@ async def ban_me(message: types.Message):
             f"Пользователь {member_fullname} был забанен!"
         )
 
-        await message.answer(f'Пользовтаель {member_fullname} был забанен по собественному желанию!', reply_markup=ReplyKeyboardRemove())
+        await message.answer(f'Пользовтаель {member_fullname} был забанен по собественному желанию!')
 
     except BadRequest:
         logger.info(f"Бот не смог забанить пользователя {member_fullname}")
