@@ -4,6 +4,8 @@ import datetime
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 
+from aiogram.types import ReplyKeyboardRemove
+
 from aiogram.utils.exceptions import BadRequest
 
 from filters import IsGroup
@@ -24,6 +26,8 @@ async def ban_me(message: types.Message):
         logger.info(
             f"Пользователь {member_fullname} был забанен!"
         )
+
+        await message.answer(f'Пользовтаель {member_fullname} был забанен по собественному желанию!', reply_markup=ReplyKeyboardRemove())
 
     except BadRequest:
         logger.info(f"Бот не смог забанить пользователя {member_fullname}")
